@@ -1,0 +1,11 @@
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.csprojAssemblyReference.cache
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.Form1.resources
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.Locals.resources
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.Properties.Resources.resources
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.csproj.GenerateResource.cache
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.csproj.CoreCompileInputs.cache
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\bin\Debug\Lab8.exe.config
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\bin\Debug\Lab8.exe
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\bin\Debug\Lab8.pdb
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.exe
+C:\Users\kikil\Documents\Universidad\Programación orientada a objetos\Laboratorios\Laboratorio 8\laboratorio-08-mabinder96\Lab8\Lab8\obj\Debug\Lab8.pdb

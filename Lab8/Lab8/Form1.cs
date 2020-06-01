@@ -12,22 +12,66 @@ namespace Lab8
 {
     public partial class Form1 : Form
     {
-        public delegate bool SearchLocalEventHandler(object source, SearchLocalEventArgs args);
+        public delegate Local SearchLocalEventHandler(object source, SearchLocalEventArgs args);
         public event SearchLocalEventHandler SearchLocalButtonClick;
-        public event EventHandler<SearchLocalEventArgs> SearchLocal;
 
         private void OnSearchLocal(int identifier)
         {
             if (SearchLocalButtonClick != null)
             {
-                bool result = SearchLocalButtonClick(this, new SearchLocalEventArgs() { Identifier = identifier });
-                if (!result)
+                Local result = SearchLocalButtonClick(this, new SearchLocalEventArgs() { Identifier = identifier });
+                if (result==null)
                 {
                     NoLocalLabel.Visible = true;
                 }
                 else
                 {
-                    //Muestro cosas encontradas
+                    textBox7.Text = result.OwnerName;
+                    textBox7.BackColor = System.Drawing.Color.White;
+                    textBox5.Text = result.AttentionTime;
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    textBox11.Visible = true;
+                    textBox11.Text = result.Type;
+                    if (result.Type == "Tienda")
+                    {
+                        textBox1.BackColor = System.Drawing.Color.White;
+                        textBox1.Visible = true;
+                        textBox3.Text = "CATEGORIAS";
+                        textBox3.Visible = true;
+                        string otro="";
+                        int count = 1;
+                        foreach (string s in result.Other)
+                        {
+                            otro +=count.ToString()+": "+ s + ". ";
+                            count++;
+                        }
+
+                        textBox1.Text = otro;
+                    }
+                    else if (result.Type == "Cine")
+                    {
+                        textBox1.BackColor = System.Drawing.Color.White;
+                        textBox3.Text = "NÚMERO SALAS";
+                        textBox1.Visible = true;
+                        textBox3.Visible = true;
+                        textBox1.Text = result.Other.ToString();
+                    }
+                    else if (result.Type == "Restaurante")
+                    {
+                        textBox1.BackColor = System.Drawing.Color.White;
+                        textBox3.Text = "MESAS EXCLUSIVAS";
+                        textBox3.Visible = true;
+                        textBox1.Visible = true;
+                        if (result.Other == true)
+                        {
+                            textBox1.Text = "SI";
+                        }
+                        else
+                        {
+                            textBox1.Text = "NO";
+                        }
+                        
+                    }
                 }
             }
         }
@@ -35,7 +79,6 @@ namespace Lab8
 
         public delegate bool AddRecreacionEventHandler(object source, AddRecreacionEventArgs args);
         public event AddRecreacionEventHandler NewRecreacionButtonClick;
-        public event EventHandler<AddRecreacionEventArgs> AddRecreacion;
 
         private void OnCheckRecreacion(string ownerName, string attentionTime, int identifier)
         {
@@ -48,7 +91,6 @@ namespace Lab8
                 }
                 else
                 {
-                    //Agregar recreación a la lista de locales
                     AddPanel.Visible = false;
                     InitialPanel.Visible = true;
                 }
@@ -57,7 +99,6 @@ namespace Lab8
 
         public delegate bool AddTiendaEventHandler(object source, AddTiendaEventArgs args);
         public event AddTiendaEventHandler NewTiendaButtonClick;
-        public event EventHandler<AddTiendaEventArgs> AddTienda;
 
         private void OnCheckTienda(string ownerName, string attentionTime, int identifier, List<string> categories)
         {
@@ -70,7 +111,6 @@ namespace Lab8
                 }
                 else
                 {
-                    //Agregar tienda a la lista de locales
                     AddPanel.Visible = false;
                     InitialPanel.Visible = true;
                 }
@@ -79,7 +119,6 @@ namespace Lab8
 
         public delegate bool AddCineEventHandler(object source, AddCineEventsArgs args);
         public event AddCineEventHandler NewCineButtonClick;
-        public event EventHandler<AddCineEventsArgs> AddCine;
 
         private void OnCheckCine(string ownerName, string attentionTime, int identifier, int number)
         {
@@ -92,7 +131,6 @@ namespace Lab8
                 }
                 else
                 {
-                    //Agregar cine a la lista de locales
                     AddPanel.Visible = false;
                     InitialPanel.Visible = true;
                 }
@@ -101,7 +139,6 @@ namespace Lab8
 
         public delegate bool AddRestaurantEventHandler(object source, AddRestaurantEventArgs args);
         public event AddRestaurantEventHandler NewRestaurantButtonClick;
-        public event EventHandler<AddRestaurantEventArgs> AddRestaurant;
 
         private void OnCheckRestaurant(string ownerName, string attentionTime, int identifier, bool exclusiveTable)
         {
@@ -114,7 +151,6 @@ namespace Lab8
                 }
                 else
                 {
-                    //Agregar cine a la lista de locales
                     AddPanel.Visible = false;
                     InitialPanel.Visible = true;
                 }
@@ -158,12 +194,25 @@ namespace Lab8
             HAddTextBox.BackColor = System.Drawing.Color.Silver;
             HAddTextBox.Text = "Ej. 12.00-19.00";
             CAddTextBox.BackColor = System.Drawing.Color.Silver;
+            TiendaButton.Tag = "no";
+            RecreacionalButton.Tag = "no";
+            CineButton.Tag = "no";
+            RestaurantButton.Tag = "no";
+            OtroTextBoxTitle.Visible = false;
+            CAddTextBox.Visible = false;
             AddPanel.Visible = true;
+            AlreadyLabel.Visible = false;
+            WrongFormatLabel.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
         }
 
 
         private void ViewInformationButton_Click(object sender, EventArgs e)
         {
+            NoLocalLabel.Visible = false;
+            WFL2.Visible = false;
+            textBox11.Visible = false;
             InitialPanel.Visible = false;
             SearchPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             textBox1.BackColor = System.Drawing.Color.Silver;
@@ -179,6 +228,10 @@ namespace Lab8
 
         private void OptionTButton_Click(object sender, EventArgs e)
         {
+            AlreadyLabel.Visible = false;
+            WrongFormatLabel.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
             if (TiendaButton.Tag.ToString() == "no")
             {
                 NAddTextBox.BackColor = System.Drawing.Color.Silver;
@@ -201,6 +254,10 @@ namespace Lab8
 
         private void OptionRButton_Click(object sender, EventArgs e)
         {
+            AlreadyLabel.Visible = false;
+            WrongFormatLabel.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
             if (RecreacionalButton.Tag.ToString() == "no")
             {
                 NAddTextBox.BackColor = System.Drawing.Color.Silver;
@@ -221,6 +278,10 @@ namespace Lab8
 
         private void OptionCButton_Click(object sender, EventArgs e)
         {
+            AlreadyLabel.Visible = false;
+            WrongFormatLabel.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
             if (CineButton.Tag.ToString() == "no")
             {
                 NAddTextBox.BackColor = System.Drawing.Color.Silver;
@@ -234,7 +295,7 @@ namespace Lab8
                 RecreacionalButton.Tag = "no";
                 CineButton.Tag = "si";
                 RestaurantButton.Tag = "no";
-                OtroTextBoxTitle.Text = "SALAS";
+                OtroTextBoxTitle.Text = "NÚMERO SALAS";
                 OtroTextBoxTitle.Visible = true;
                 CAddTextBox.Text = "N°";
                 CAddTextBox.Visible = true;
@@ -243,6 +304,10 @@ namespace Lab8
 
         private void OptionResButton_Click(object sender, EventArgs e)
         {
+            AlreadyLabel.Visible = false;
+            WrongFormatLabel.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
             if (RestaurantButton.Tag.ToString() == "no")
             {
                 NAddTextBox.BackColor = System.Drawing.Color.Silver;
@@ -263,18 +328,34 @@ namespace Lab8
             }
         }
 
+        public delegate List<Local> ShowLocalsEventHandler(object source, ShowLocalsEventArgs args);
+        public event ShowLocalsEventHandler ShowLocalsClick;
+        private List<Local>  OnShowLocals()
+        {
+            if (ShowLocalsClick != null)
+            {
+                List<Local> result = ShowLocalsClick(this, new ShowLocalsEventArgs() { });
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
         private void AllLocalsButton_Click(object sender, EventArgs e)
         {
-            Locals f2 = new Locals();
-            f2.ShowDialog();
+            List<Local> locals = OnShowLocals();
+            Locals f2 = new Locals(locals);
+            f2.ShowDialog();            
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+
             string name = NAddTextBox.Text;
             bool numcheck;
-            int identificaction;
-            numcheck = int.TryParse(IAddTextBox.Text, out identificaction);
+            numcheck = int.TryParse(IAddTextBox.Text, out int identificaction);
             string horario = HAddTextBox.Text;
             AlreadyLabel.Visible = false;
             WrongFormatLabel.Visible = false;
@@ -283,16 +364,15 @@ namespace Lab8
             if (TiendaButton.Tag.ToString() == "si")
             {
                 List<string> otros = CAddTextBox.Text.Split(',').ToList();
-                
-                if (!numcheck)
+                if ((!numcheck || identificaction<1) && IAddTextBox.Text!="")
                 {
                     WrongFormatLabel.Visible = true;
                 }
-                if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(identificaction.ToString()) || String.IsNullOrEmpty(horario) || String.IsNullOrEmpty(otros.ToString())||CAddTextBox.Text== "Categoría 1, categoría 2, etc." || HAddTextBox.Text== "Ej. 12.00-19.00")
+                if (String.IsNullOrEmpty(name) || IAddTextBox.Text == "" || String.IsNullOrEmpty(horario) || String.IsNullOrEmpty(otros.ToString())||CAddTextBox.Text== "Categoría 1, categoría 2, etc." || HAddTextBox.Text== "Ej. 12.00-19.00")
                 {
                     label1.Visible = true;
                 }
-                else if (numcheck) 
+                else if (numcheck && identificaction >=1) 
                 {
                     OnCheckTienda(name, horario, identificaction, otros);
                     
@@ -301,17 +381,16 @@ namespace Lab8
             }
             else if(CineButton.Tag.ToString() == "si")
             {
-                int otros;
-                bool numcheck2 = int.TryParse(CAddTextBox.Text, out otros);
-                if (!numcheck2 || !numcheck)
+                bool numcheck2 = int.TryParse(CAddTextBox.Text, out int otros);
+                if ((!numcheck2 || !numcheck || identificaction < 1  || otros <1) && IAddTextBox.Text != "" &&  CAddTextBox.Text != "")
                 {
                     WrongFormatLabel.Visible = true;
                 }
-                if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(identificaction.ToString()) || String.IsNullOrEmpty(horario) || String.IsNullOrEmpty(otros.ToString()) || CAddTextBox.Text == "N°" || HAddTextBox.Text == "Ej. 12.00-19.00")
+                if (String.IsNullOrEmpty(name) ||   IAddTextBox.Text == "" || String.IsNullOrEmpty(horario) || CAddTextBox.Text == "" || CAddTextBox.Text == "N°" || HAddTextBox.Text == "Ej. 12.00-19.00")
                 {
                     label1.Visible = true;
                 }
-                else if (numcheck && numcheck2) 
+                else if (numcheck && numcheck2 &&identificaction>=1 && otros>=1) 
                 {
                     OnCheckCine(name, horario, identificaction, otros);
                 }
@@ -328,19 +407,19 @@ namespace Lab8
                 {
                     eleccion = false;
                 }
-                else
+                else if (CAddTextBox.Text != "" && CAddTextBox.Text != "NO / SI")
                 {
                     WrongFormatLabel.Visible = true;
                 }
-                if (!numcheck)
+                if ((!numcheck || identificaction < 1) && IAddTextBox.Text != "")
                 {
                     WrongFormatLabel.Visible = true;
                 }
-                if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(identificaction.ToString()) || String.IsNullOrEmpty(horario) ||(CAddTextBox.Text != "SI" && CAddTextBox.Text != "NO") || CAddTextBox.Text == "NO / SI" || HAddTextBox.Text == "Ej. 12.00-19.00")
+                if (String.IsNullOrEmpty(name) ||  IAddTextBox.Text == "" || String.IsNullOrEmpty(horario) || CAddTextBox.Text == "" ||CAddTextBox.Text == "NO / SI" || HAddTextBox.Text == "Ej. 12.00-19.00")
                 {
                     label1.Visible = true;
                 }
-                else if (numcheck) //AGregar que revise que no exista
+                else if (numcheck &&identificaction>=1 &&(CAddTextBox.Text == "SI" || CAddTextBox.Text == "NO"))
                 {
                     OnCheckRestaurant(name, horario, identificaction, eleccion);
                 }
@@ -348,15 +427,15 @@ namespace Lab8
             }
             else if (RecreacionalButton.Tag.ToString() == "si")
             {
-                if (!numcheck)
+                if ((!numcheck || identificaction < 1) && IAddTextBox.Text != "")
                 {
                     WrongFormatLabel.Visible = true;
                 }
-                if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(identificaction.ToString()) || String.IsNullOrEmpty(horario) ||HAddTextBox.Text == "Ej. 12.00-19.00")
+                if (String.IsNullOrEmpty(name) ||  IAddTextBox.Text == "" || String.IsNullOrEmpty(horario) ||HAddTextBox.Text == "Ej. 12.00-19.00")
                 {
                     label1.Visible = true;
                 }
-                else if (numcheck) //AGregar que revise que no exista
+                else if (numcheck&&identificaction>=1)
                 {
                     OnCheckRecreacion(name, horario, identificaction);
                 }
@@ -368,20 +447,21 @@ namespace Lab8
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            int identificaction;
             bool numcheck;
-            numcheck = int.TryParse(IAddTextBox.Text, out identificaction);
-            if (!numcheck)
+            numcheck = int.TryParse(textBox9.Text, out int identificaction);
+            if (!numcheck || identificaction < 1)
             {
                 WFL2.Visible = true;
             }
-            else if (numcheck)
+            else if (numcheck &&identificaction>=1)
             {
                 OnSearchLocal(identificaction);
             }
 
         }
+
+
     }
 }

@@ -8,16 +8,15 @@ namespace Lab8
 {
     public class Cine : Local
     {
-        private int numberOfRooms;
 
-        public Cine(string ownerName, int identifier, string attentionTime, int numberOfRooms)
+        public Cine(string ownerName, int identifier, string attentionTime, dynamic other)
         {
             this.ownerName = ownerName;
             this.identifier = identifier;
             this.attentionTime = attentionTime;
-            this.numberOfRooms = numberOfRooms;
+            this.Other = other;
+            this.Type = "Cine";
         }
 
-        public int NumberOfRooms { get => numberOfRooms; set => numberOfRooms = value; }
     }
 }

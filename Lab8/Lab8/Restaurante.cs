@@ -8,16 +8,15 @@ namespace Lab8
 {
     public class Restaurante : Local
     {
-        private bool exclusiveTable;
 
-        public Restaurante(string ownerName, int identifier, string attentionTime, bool exclusiveTable)
+        public Restaurante(string ownerName, int identifier, string attentionTime, dynamic other)
         {
             this.ownerName = ownerName;
             this.identifier = identifier;
             this.attentionTime = attentionTime;
-            this.exclusiveTable = exclusiveTable;
+            this.Other = other;
+            this.Type = "Restaurante";
         }
 
-        public bool ExclusiveTable { get => exclusiveTable; set => exclusiveTable = value; }
     }
 }

@@ -48,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCineEventsArgs.cs" />
-    <Compile Include="AddRecreacionEventArgs.cs" />
-    <Compile Include="AddRestaurantEventArgs.cs" />
-    <Compile Include="AddTiendaEventArgs.cs" />
+    <Compile Include="EventArgs\AddCineEventsArgs.cs" />
+    <Compile Include="EventArgs\AddRecreacionEventArgs.cs" />
+    <Compile Include="EventArgs\AddRestaurantEventArgs.cs" />
+    <Compile Include="EventArgs\AddTiendaEventArgs.cs" />
     <Compile Include="Cine.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -76,7 +76,8 @@
     </Compile>
     <Compile Include="Recreacional.cs" />
     <Compile Include="Restaurante.cs" />
-    <Compile Include="SearchLocalEventArgs.cs" />
+    <Compile Include="EventArgs\SearchLocalEventArgs.cs" />
+    <Compile Include="ShowLocalsEventArgs.cs" />
     <Compile Include="Tienda.cs" />
   </ItemGroup>
   <ItemGroup>

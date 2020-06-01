@@ -13,6 +13,7 @@ namespace Lab8
             this.ownerName = ownerName;
             this.identifier = identifier;
             this.attentionTime = attentionTime;
+            this.Type = "Recreacional";
         }
     }
 }

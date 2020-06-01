@@ -14,7 +14,7 @@ namespace Lab8
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form1 form1 = new Form1();
-            LocalController localController = new LocalController(form1);
+            new LocalController(form1);
             Application.Run(form1);
         }
     }
